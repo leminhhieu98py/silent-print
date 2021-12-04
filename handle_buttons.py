@@ -1,5 +1,4 @@
 from global_variables import *
-from print import *
 
 
 # CONFIG PRINTER -------------------------------------------------
