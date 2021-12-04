@@ -2,11 +2,17 @@ from pyhtml2pdf import converter
 import win32print
 import win32api
 import os
+from os import path
 import string
 import random
 import time
 
 from global_variables import *
+
+
+def create_pdf_folder():
+    if not path.exists("pdf"):
+        os.mkdir("pdf")
 
 
 def filename_generator(size=7, chars=string.ascii_uppercase + string.digits):
@@ -46,8 +52,9 @@ def remove_pdf(filepath):
 
 def print_engine():
     url = "https://devlabel.globex.vn/itemsOrderExpress/label/printbill?orderNumber=GB00000224232"
+    create_pdf_folder()
     save_to_pdf(url)
-    print_pdf(printer)
+    # print_pdf(printer)
 
 
-# print_engine()
+print_engine()
