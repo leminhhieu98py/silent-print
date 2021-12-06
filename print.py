@@ -30,15 +30,16 @@ def save_to_pdf(url, pdf_folder):
 
 
 def print_pdf(printer, pdf_folder):
-    current_printer = win32print.SetDefaultPrinter(printer)
-    current_printer = win32print.GetDefaultPrinter()
+    # current_printer = win32print.SetDefaultPrinter(printer)
+    # current_printer = win32print.GetDefaultPrinter()
+    # print(current_printer)
     pdf_folder_path = os.path.join(pdf_folder)
     try:
         for filename in os.listdir(pdf_folder_path):
             if filename.endswith(".pdf"):
                 filepath = os.path.join(pdf_folder_path, filename)
-                print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, current_printer)
-                # subprocess.Popen(print_cmd)
+                print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
+                subprocess.Popen(print_cmd)
                 time.sleep(2)
                 remove_pdf(filepath)
             else:
