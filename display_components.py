@@ -11,6 +11,7 @@ from start_server import *
 
 directory_frame = ""
 
+
 def quit_window():
     icon.stop()
     win.destroy()
@@ -90,8 +91,6 @@ def display_printers():
 
     optionmenu = ttk.OptionMenu(directory_frame, a6, *printer_list, command=select_printer_3)
     optionmenu.place(x=90, y=110, width=340)
-
-
 
 
 def display_guide_labels():

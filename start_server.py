@@ -15,9 +15,9 @@ def printer():
 def create_entry():
     req = request.get_json(force = True)
     url = req["url"] if req["url"] else ""
-    # print("hello")
-    if url != "":
-        print_engine(url)
+    paper_type = req["paper_type"] if req["paper_type"] else ""
+    if url != "" and paper_type != "":
+        print_engine(url, paper_type)
 
     res = make_response(jsonify({"message": "JSON received"}), 200)
     res.headers["Content-Type"] = "application/json"
