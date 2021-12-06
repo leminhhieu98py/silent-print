@@ -36,7 +36,7 @@ def print_pdf(printer):
                 filepath = os.path.join(pdf_folder_path, filename)
                 print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, current_printer)
                 subprocess.Popen(print_cmd)
-                time.sleep(1)
+                time.sleep(2)
                 remove_pdf(filepath)
             else:
                 continue
@@ -50,11 +50,7 @@ def remove_pdf(filepath):
         os.remove(filepath)
 
 
-def print_engine():
-    url = "https://devlabel.globex.vn/itemsOrderExpress/label/printbill?orderNumber=GB00000224232"
+def print_engine(url):
     create_pdf_folder()
     save_to_pdf(url)
-    # print_pdf(printer)
-
-
-print_engine()
+    print_pdf(printer)

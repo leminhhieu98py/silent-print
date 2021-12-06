@@ -6,7 +6,7 @@ import PIL.Image
 
 from handle_buttons import *
 from global_variables import *
-
+from start_server import *
 
 
 directory_frame = ""
@@ -35,13 +35,13 @@ def hide_window():
 
 def display_frame():
     global directory_frame
-    directory_frame = ttk.LabelFrame(win, text='Silent Print', width=380, height=110)
+    directory_frame = ttk.LabelFrame(win, text='Choose Printers', width=450, height=200)
     directory_frame.place(x=10, y=10)
 
 
 def config_app_screen():
-    windowWidth = 400
-    windowHeight = 130
+    windowWidth = 470
+    windowHeight = 220
     screenWidth = win.winfo_screenwidth()
     screenHeight = win.winfo_screenheight()
     xCordinate = int((screenWidth/2) - (windowWidth/2))
@@ -52,16 +52,37 @@ def config_app_screen():
     win.title("Silent Print Application")
 
 
-def display_printer(label):
+def display_printer():
+    global printer
     e = StringVar()
-    e.set(printer)
+    if printer in printer_list:
+        e.set(printer)
+    else:
+        printer = config.get('CONFIG', 'printer').strip("\n")
+        e.set(printer)
+        win32print.SetDefaultPrinter(printer)
+
     optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
-    optionmenu.place(x=10, y=10, width=360)
+    optionmenu.place(x=90, y=10, width=340)
+
+    optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
+    optionmenu.place(x=90, y=60, width=340)
+
+    optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
+    optionmenu.place(x=90, y=110, width=340)
 
 
-def display_guide_label():
-    guide_label = Label(directory_frame, text='Chosen printer is used for next papers')
-    guide_label.place(x=10, y=60)
+
+
+def display_guide_labels():
+    a4_label = Label(directory_frame, text='A4 printer: ')
+    a4_label.place(x=10, y=10)
+
+    a5_label = Label(directory_frame, text='A5 printer: ')
+    a5_label.place(x=10, y=60)
+
+    a6_label = Label(directory_frame, text='A6 printer: ')
+    a6_label.place(x=10, y=110)
 
 
 win.protocol('WM_DELETE_WINDOW', hide_window)
