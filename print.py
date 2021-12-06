@@ -35,7 +35,7 @@ def print_pdf(printer):
             if filename.endswith(".pdf"):
                 filepath = os.path.join(pdf_folder_path, filename)
                 print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, current_printer)
-                subprocess.Popen(print_cmd)
+                # subprocess.Popen(print_cmd)
                 time.sleep(2)
                 remove_pdf(filepath)
             else:
@@ -53,4 +53,4 @@ def remove_pdf(filepath):
 def print_engine(url):
     create_pdf_folder()
     save_to_pdf(url)
-    print_pdf(printer)
+    # print_pdf(printer_1)

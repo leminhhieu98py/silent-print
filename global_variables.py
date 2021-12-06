@@ -17,8 +17,12 @@ win.tk.call("set_theme", "light")
 
 config = configparser.ConfigParser()
 config.read('temp/CONFIG.INI')
-printer = config.get('CONFIG', 'printer').strip("\n")
-printer = printer if (printer != "0") else win32print.GetDefaultPrinter()
+printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
+printer_1 = printer_1 if (printer_1 != "0") else win32print.GetDefaultPrinter()
+printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
+printer_2 = printer_2 if (printer_2 != "0") else win32print.GetDefaultPrinter()
+printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
+printer_3 = printer_3 if (printer_3 != "0") else win32print.GetDefaultPrinter()
 
 
 FOXIT_EXE = "temp\\Foxit Reader\\FoxitReader.exe"

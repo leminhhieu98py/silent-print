@@ -52,23 +52,43 @@ def config_app_screen():
     win.title("Silent Print Application")
 
 
-def display_printer():
-    global printer
-    e = StringVar()
-    if printer in printer_list:
-        e.set(printer)
-    else:
-        printer = config.get('CONFIG', 'printer').strip("\n")
-        e.set(printer)
-        win32print.SetDefaultPrinter(printer)
+def display_printers():
+    global printer_1
+    global printer_2
+    global printer_3
 
-    optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
+
+    # SET SELECTION
+    a4 = StringVar()
+    if printer_1 in printer_list:
+        a4.set(printer_1)
+    else:
+        printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
+        a4.set(printer_1)
+
+    a5 = StringVar()
+    if printer_2 in printer_list:
+        a5.set(printer_2)
+    else:
+        printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
+        a5.set(printer_2)
+
+    a6 = StringVar()
+    if printer_3 in printer_list:
+        a6.set(printer_3)
+    else:
+        printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
+        a6.set(printer_3)
+
+
+    # DISPLAY SELECT BOX
+    optionmenu = ttk.OptionMenu(directory_frame, a4, *printer_list, command=select_printer_1)
     optionmenu.place(x=90, y=10, width=340)
 
-    optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
+    optionmenu = ttk.OptionMenu(directory_frame, a5, *printer_list, command=select_printer_2)
     optionmenu.place(x=90, y=60, width=340)
 
-    optionmenu = ttk.OptionMenu(directory_frame, e, *printer_list, command=select_printer)
+    optionmenu = ttk.OptionMenu(directory_frame, a6, *printer_list, command=select_printer_3)
     optionmenu.place(x=90, y=110, width=340)
 
 

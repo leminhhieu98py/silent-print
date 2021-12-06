@@ -15,6 +15,7 @@ def printer():
 def create_entry():
     req = request.get_json(force = True)
     url = req["url"] if req["url"] else ""
+    # print("hello")
     if url != "":
         print_engine(url)
 

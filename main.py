@@ -4,7 +4,7 @@ from display_components import *
 # Display component
 config_app_screen()
 display_frame()
-display_printer()
+display_printers()
 display_guide_labels()
 
 
