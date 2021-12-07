@@ -95,13 +95,13 @@ def display_printers():
 
 def display_guide_labels():
     a4_label = Label(directory_frame, text='A4 printer: ')
-    a4_label.place(x=10, y=10)
+    a4_label.place(x=10, y=15)
 
     a5_label = Label(directory_frame, text='A5 printer: ')
-    a5_label.place(x=10, y=60)
+    a5_label.place(x=10, y=65)
 
     a6_label = Label(directory_frame, text='A6 printer: ')
-    a6_label.place(x=10, y=110)
+    a6_label.place(x=10, y=115)
 
 
 win.protocol('WM_DELETE_WINDOW', hide_window)

@@ -3,6 +3,7 @@ from threading import Thread
 
 
 from print import *
+from notify import *
 
 
 app = Flask(__name__)
@@ -18,6 +19,8 @@ def create_entry():
     paper_type = req["paper_type"] if req["paper_type"] else ""
     if url != "" and paper_type != "":
         print_engine(url, paper_type)
+    else:
+        notify_message("Can not find Url or paper type")
 
     res = make_response(jsonify({"message": "JSON received"}), 200)
     res.headers["Content-Type"] = "application/json"

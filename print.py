@@ -10,6 +10,7 @@ from threading import Thread
 
 
 from global_variables import *
+from notify import *
 from const import *
 
 
@@ -44,8 +45,8 @@ def print_pdf(printer, pdf_folder):
                 remove_pdf(filepath)
             else:
                 continue
-    except:
-        print("Failed")
+    except Exception as e:
+        notify_message(e.message)
         pass
 
 
@@ -57,7 +58,7 @@ def remove_pdf(filepath):
 def print_A4(url):
     create_pdf_folder(PAPER_FOLDER["A4"])
     save_to_pdf(url, PAPER_FOLDER["A4"])
-    print_pdf(printer_1, PAPER_FOLDER["A4"])
+    # print_pdf(printer_1, PAPER_FOLDER["A4"])
 
 
 def print_A5(url):
@@ -82,3 +83,5 @@ def print_engine(url, paper_type):
     elif int(paper_type) == PAPER_TYPE["A6"]:
         thread_a6 = Thread(target=print_A6, args=(url,))
         thread_a6.start()
+    else:
+        notify_message("Can not find paper type")
