@@ -1,6 +1,4 @@
 from pyhtml2pdf import converter
-import win32print
-import win32api
 import os
 from os import path
 import string
@@ -31,9 +29,6 @@ def save_to_pdf(url, pdf_folder):
 
 
 def print_pdf(printer, pdf_folder):
-    # current_printer = win32print.SetDefaultPrinter(printer)
-    # current_printer = win32print.GetDefaultPrinter()
-    # print(current_printer)
     pdf_folder_path = os.path.join(pdf_folder)
     try:
         for filename in os.listdir(pdf_folder_path):
@@ -41,7 +36,7 @@ def print_pdf(printer, pdf_folder):
                 filepath = os.path.join(pdf_folder_path, filename)
                 print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
                 subprocess.Popen(print_cmd)
-                time.sleep(2)
+                time.sleep(4)
                 remove_pdf(filepath)
             else:
                 continue
@@ -58,7 +53,7 @@ def remove_pdf(filepath):
 def print_A4(url):
     create_pdf_folder(PAPER_FOLDER["A4"])
     save_to_pdf(url, PAPER_FOLDER["A4"])
-    # print_pdf(printer_1, PAPER_FOLDER["A4"])
+    print_pdf(printer_1, PAPER_FOLDER["A4"])
 
 
 def print_A5(url):

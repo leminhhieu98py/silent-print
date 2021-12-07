@@ -2,3 +2,6 @@ __pycache__/
 PDF_1/
 PDF_2/
 PDF_3/
+venv/
+build/
+dist/

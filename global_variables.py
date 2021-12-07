@@ -32,13 +32,14 @@ auto_print_thread_status = False
 
 def get_list_printers():
     global printer_list
-    data = subprocess.check_output(['wmic', 'printer', 'list', 'brief']).decode('utf-8').split('\r\r\n')
+    data = subprocess.check_output(['wmic', 'printer', 'list', 'brief'], shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE).decode('utf-8').split('\r\r\n')
     data=data[1:] # To get rid of the first row
 
     for line in data:
         for printername in line.split("  "):
             if printername != "":
                 printer_list.append(printername)
-                break # To get the first column value only
+                # break # To get the first column value only
 
 get_list_printers()
+print(printer_list)
