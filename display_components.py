@@ -15,6 +15,7 @@ directory_frame = ""
 def quit_window():
     icon.stop()
     win.destroy()
+    kill()
 
 
 def show_window():
