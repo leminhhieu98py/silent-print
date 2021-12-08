@@ -7,6 +7,7 @@ import time
 from threading import Thread
 import win32api
 import win32print
+# from weasyprint import HTML
 
 
 from global_variables import *
@@ -27,42 +28,34 @@ def save_to_pdf(url, pdf_folder):
     filename = filename_generator()
     filename_with_ext = filename + ".pdf"
     filepath = os.path.join(pdf_folder, filename_with_ext)
+    # HTML(url).write_pdf(filepath)
     converter.convert(url, filepath)
 
+    return filepath
 
-def print_pdf(printer, pdf_folder):
+
+def print_pdf(printer, pdf_folder, filepath):
     pdf_folder_path = os.path.join(pdf_folder)
     if(printer != ""):
         win32print.SetDefaultPrinter(printer)
         try:
-            for filename in os.listdir(pdf_folder_path):
-                if filename.endswith(".pdf"):
-                    filepath = os.path.join(pdf_folder_path, filename)
-                    print(filepath)
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
-                    # win32api.ShellExecute(0, 'open', FOXIT_EXE, '-ghostscript "'+GHOSTSCRIPT_PATH+'" -printer "'+win32print.GetDefaultPrinter()+'" "' + filepath + '"', '.', 0) --> default pdf reader  --> mất nội dung 2 bên cạnh
-
-                    # win32api.ShellExecute(0,"print",filepath,'"%s"' % win32print.GetDefaultPrinter(),".",0)   --> default pdf reader  --> mất nội dung 2 bên cạnh
-
-                    si = subprocess.STARTUPINFO()
-                    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-
-                    print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
-                    my_pro = subprocess.Popen(print_cmd,    #subprocess not working when exporting to exe file
-                    stdin=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    startupinfo=si)
-                    my_pro.communicate()
+            print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
+            my_pro = subprocess.Popen(print_cmd,    #subprocess not working when exporting to exe file
+            stdin=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            startupinfo=si)
+            # my_pro.communicate()
 
 
-                    print("Printing...")
-                    time.sleep(4)
-                    print("Removing...")
-                    # remove_pdf(filepath)
+            print("Printing...")
+            time.sleep(10)
+            print("Removing...")
+            remove_pdf(filepath)
 
-                else:
-                    continue
         except Exception as e:
             print(e)
             notify_message("In lỗi: " + printer)
@@ -90,8 +83,8 @@ def print_A4(url):
         printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
         printer_1 = printer_1 if (printer_1 != "0") else ""
     create_pdf_folder(PAPER_FOLDER["A4"])
-    save_to_pdf(url, PAPER_FOLDER["A4"])
-    print_pdf(printer_1, PAPER_FOLDER["A4"])
+    filepath = save_to_pdf(url, PAPER_FOLDER["A4"])
+    print_pdf(printer_1, PAPER_FOLDER["A4"], filepath)
 
 
 def print_A5(url):
@@ -100,8 +93,8 @@ def print_A5(url):
         printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
         printer_2 = printer_2 if (printer_2 != "0") else ""
     create_pdf_folder(PAPER_FOLDER["A5"])
-    save_to_pdf(url, PAPER_FOLDER["A5"])
-    print_pdf(printer_2, PAPER_FOLDER["A5"])
+    filepath = save_to_pdf(url, PAPER_FOLDER["A5"])
+    print_pdf(printer_2, PAPER_FOLDER["A5"], filepath)
 
 
 def print_A6(url):
@@ -110,8 +103,8 @@ def print_A6(url):
         printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
         printer_3 = printer_3 if (printer_3 != "0") else ""
     create_pdf_folder(PAPER_FOLDER["A6"])
-    save_to_pdf(url, PAPER_FOLDER["A6"])
-    print_pdf(printer_3, PAPER_FOLDER["A6"])
+    filepath = save_to_pdf(url, PAPER_FOLDER["A6"])
+    print_pdf(printer_3, PAPER_FOLDER["A6"], filepath)
 
 
 def print_engine(url, paper_type):
