@@ -25,21 +25,18 @@ printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
 printer_3 = printer_3 if (printer_3 != "0") else win32print.GetDefaultPrinter()
 
 
-FOXIT_EXE = "temp\\Foxit Reader\\FoxitReader.exe"
+FOXIT_EXE = "temp\\FoxitReader.exe"
 printer_list = ['']
 auto_print_status = False
 auto_print_thread_status = False
 
 def get_list_printers():
-    global printer_list
-    data = subprocess.check_output(['wmic', 'printer', 'list', 'brief'], shell=True, stderr=subprocess.PIPE, stdin=subprocess.PIPE).decode('utf-8').split('\r\r\n')
-    data=data[1:] # To get rid of the first row
+    printers = win32print.EnumPrinters(2)
+    NAME_INDEX = 2
+    for printer in printers:
+        printername = printer[NAME_INDEX]
+        if printername != "":
+            printer_list.append(printername)
 
-    for line in data:
-        for printername in line.split("  "):
-            if printername != "":
-                printer_list.append(printername)
-                # break # To get the first column value only
 
 get_list_printers()
-print(printer_list)

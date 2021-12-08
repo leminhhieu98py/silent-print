@@ -5,6 +5,8 @@ import string
 import random
 import time
 from threading import Thread
+import win32api
+import win32print
 
 
 from global_variables import *
@@ -30,18 +32,21 @@ def save_to_pdf(url, pdf_folder):
 
 def print_pdf(printer, pdf_folder):
     pdf_folder_path = os.path.join(pdf_folder)
+    win32print.SetDefaultPrinter(printer)
     try:
         for filename in os.listdir(pdf_folder_path):
             if filename.endswith(".pdf"):
                 filepath = os.path.join(pdf_folder_path, filename)
-                print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
-                subprocess.Popen(print_cmd)
+                # print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
+                # p = subprocess.Popen(print_cmd,shell=True,stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE)
+                win32api.ShellExecute(0,"print",filepath,'"%s"' % win32print.GetDefaultPrinter(),".",0)
                 time.sleep(4)
                 remove_pdf(filepath)
+
             else:
                 continue
     except Exception as e:
-        notify_message(e.message)
+        notify_message("In lỗi: " + printer)
         pass
 
 

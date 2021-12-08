@@ -10,12 +10,13 @@ from pyzbar import pyzbar
 block_cipher = None
 
 sys.modules['FixTk'] = None
+
 a = Analysis(['main.py'],
              pathex=[],
              binaries=[],
              datas=[
-                 ('temp', 'temp'),
-                 ('venv\Lib\site-packages\plyer', 'plyer'),
+                ('temp', 'temp'),
+                ('venv\Lib\site-packages\plyer', 'plyer'),
              ],
              hiddenimports=[],
              hookspath=[],
