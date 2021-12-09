@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from threading import Thread
-from multiprocessing import Process
 import requests
 
 
 from print import *
-from notify import *
+from const import *
+# from global_variables import *
 
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ def printer():
 
 @app.route("/print/create-entry", methods=['POST'])
 def create_entry():
+    global directory_frame
     req = request.get_json(force = True)
     url = req["url"] if req["url"] else ""
     paper_type = req["paper_type"] if req["paper_type"] else ""

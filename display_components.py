@@ -9,9 +9,6 @@ from global_variables import *
 from start_server import *
 
 
-directory_frame = ""
-
-
 def quit_window():
     icon.stop()
     win.destroy()
@@ -35,15 +32,9 @@ def hide_window():
         pass
 
 
-def display_frame():
-    global directory_frame
-    directory_frame = ttk.LabelFrame(win, text='Choose Printers', width=450, height=200)
-    directory_frame.place(x=10, y=10)
-
-
 def config_app_screen():
     windowWidth = 470
-    windowHeight = 220
+    windowHeight = 260
     screenWidth = win.winfo_screenwidth()
     screenHeight = win.winfo_screenheight()
     xCordinate = int((screenWidth/2) - (windowWidth/2))
@@ -88,10 +79,10 @@ def display_printers():
     optionmenu.place(x=90, y=10, width=340)
 
     optionmenu = ttk.OptionMenu(directory_frame, a5, *printer_list, command=select_printer_a5)
-    optionmenu.place(x=90, y=60, width=340)
+    optionmenu.place(x=90, y=75, width=340)
 
     optionmenu = ttk.OptionMenu(directory_frame, a6, *printer_list, command=select_printer_a6)
-    optionmenu.place(x=90, y=110, width=340)
+    optionmenu.place(x=90, y=140, width=340)
 
 
 def display_guide_labels():
@@ -99,10 +90,17 @@ def display_guide_labels():
     a4_label.place(x=10, y=15)
 
     a5_label = Label(directory_frame, text='A5 printer: ')
-    a5_label.place(x=10, y=65)
+    a5_label.place(x=10, y=80)
 
     a6_label = Label(directory_frame, text='A6 printer: ')
-    a6_label.place(x=10, y=115)
+    a6_label.place(x=10, y=145)
+
+
+def display_status_labels():
+    display_status_a4("")
+    display_status_a5("")
+    display_status_a6("")
+
 
 
 win.protocol('WM_DELETE_WINDOW', hide_window)
