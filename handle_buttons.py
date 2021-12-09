@@ -2,6 +2,7 @@ from global_variables import *
 
 
 # CONFIG PRINTER -------------------------------------------------
+
 def select_printer_a4(selection):
     global printer_a4
     printer_a4 = selection

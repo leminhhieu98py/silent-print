@@ -70,8 +70,6 @@ def print_pdf(printer, pdf_folder, filepath):
         notify_message("Vui lòng chọn máy in")
 
 
-
-
 def remove_pdf(filepath):
     if os.path.exists(filepath):
         os.remove(filepath)
@@ -102,7 +100,6 @@ def print_A6(url):
     create_pdf_folder(PAPER_FOLDER["A6"])
     filepath = save_to_pdf(url, PAPER_FOLDER["A6"])
     print_pdf(printer_a6, PAPER_FOLDER["A6"], filepath)
-
 
 
 def print_engine(url, paper_type):
