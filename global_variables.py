@@ -17,12 +17,12 @@ win.tk.call("set_theme", "light")
 
 config = configparser.ConfigParser()
 config.read('temp/CONFIG.INI')
-printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
-printer_1 = printer_1 if (printer_1 != "0") else ""
-printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
-printer_2 = printer_2 if (printer_2 != "0") else ""
-printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
-printer_3 = printer_3 if (printer_3 != "0") else ""
+# printer_a4 = config.get('CONFIG', 'printer_a4').strip("\n")
+# printer_a4 = printer_a4 if (printer_a4 != "0") else ""
+# printer_a5 = config.get('CONFIG', 'printer_a5').strip("\n")
+# printer_a5 = printer_a5 if (printer_a5 != "0") else ""
+# printer_a6 = config.get('CONFIG', 'printer_a6').strip("\n")
+# printer_a6 = printer_a6 if (printer_a6 != "0") else ""
 
 
 FOXIT_EXE = "temp\\Foxit Reader\\FoxitReader.exe"
@@ -42,5 +42,15 @@ def get_list_printers():
         if printername != "":
             printer_list.append(printername)
 
+
+def get_printer_name(printer):
+    name = config.get('CONFIG', printer).strip("\n")
+    name = name if (name != "0") else ""
+    return name
+
+
+printer_a4 = get_printer_name("printer_a4")
+printer_a5 = get_printer_name("printer_a5")
+printer_a6 = get_printer_name("printer_a6")
 
 get_list_printers()

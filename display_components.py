@@ -55,42 +55,42 @@ def config_app_screen():
 
 
 def display_printers():
-    global printer_1
-    global printer_2
-    global printer_3
+    global printer_a4
+    global printer_a5
+    global printer_a6
 
 
     # SET SELECTION
     a4 = StringVar()
-    if printer_1 in printer_list:
-        a4.set(printer_1)
+    if printer_a4 in printer_list:
+        a4.set(printer_a4)
     else:
-        printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
-        a4.set(printer_1)
+        printer_a4 = config.get('CONFIG', 'printer_a4').strip("\n")
+        a4.set(printer_a4)
 
     a5 = StringVar()
-    if printer_2 in printer_list:
-        a5.set(printer_2)
+    if printer_a5 in printer_list:
+        a5.set(printer_a5)
     else:
-        printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
-        a5.set(printer_2)
+        printer_a5 = config.get('CONFIG', 'printer_a5').strip("\n")
+        a5.set(printer_a5)
 
     a6 = StringVar()
-    if printer_3 in printer_list:
-        a6.set(printer_3)
+    if printer_a6 in printer_list:
+        a6.set(printer_a6)
     else:
-        printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
-        a6.set(printer_3)
+        printer_a6 = config.get('CONFIG', 'printer_a6').strip("\n")
+        a6.set(printer_a6)
 
 
     # DISPLAY SELECT BOX
-    optionmenu = ttk.OptionMenu(directory_frame, a4, *printer_list, command=select_printer_1)
+    optionmenu = ttk.OptionMenu(directory_frame, a4, *printer_list, command=select_printer_a4)
     optionmenu.place(x=90, y=10, width=340)
 
-    optionmenu = ttk.OptionMenu(directory_frame, a5, *printer_list, command=select_printer_2)
+    optionmenu = ttk.OptionMenu(directory_frame, a5, *printer_list, command=select_printer_a5)
     optionmenu.place(x=90, y=60, width=340)
 
-    optionmenu = ttk.OptionMenu(directory_frame, a6, *printer_list, command=select_printer_3)
+    optionmenu = ttk.OptionMenu(directory_frame, a6, *printer_list, command=select_printer_a6)
     optionmenu.place(x=90, y=110, width=340)
 
 

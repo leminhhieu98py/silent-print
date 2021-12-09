@@ -43,11 +43,11 @@ def print_pdf(printer, pdf_folder, filepath):
             si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
             print_cmd = '"{}" /t "{}" "{}"'.format(FOXIT_EXE, filepath, printer)
-            my_pro = subprocess.Popen(print_cmd,    #subprocess not working when exporting to exe file
-            stdin=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            startupinfo=si)
+            # my_pro = subprocess.Popen(print_cmd,    #subprocess not working when exporting to exe file
+            # stdin=subprocess.PIPE,
+            # stderr=subprocess.PIPE,
+            # stdout=subprocess.PIPE,
+            # startupinfo=si)
             # my_pro.communicate()
 
 
@@ -78,33 +78,31 @@ def remove_pdf(filepath):
 
 
 def print_A4(url):
-    global printer_1
-    if printer_1 == "":
-        printer_1 = config.get('CONFIG', 'printer_1').strip("\n")
-        printer_1 = printer_1 if (printer_1 != "0") else ""
+    global printer_a4
+    if printer_a4 == "":
+        printer_a4 = get_printer_name("printer_a4")
     create_pdf_folder(PAPER_FOLDER["A4"])
     filepath = save_to_pdf(url, PAPER_FOLDER["A4"])
-    print_pdf(printer_1, PAPER_FOLDER["A4"], filepath)
+    print_pdf(printer_a4, PAPER_FOLDER["A4"], filepath)
 
 
 def print_A5(url):
-    global printer_2
-    if printer_2 == "":
-        printer_2 = config.get('CONFIG', 'printer_2').strip("\n")
-        printer_2 = printer_2 if (printer_2 != "0") else ""
+    global printer_a5
+    if printer_a5 == "":
+        printer_a5 = get_printer_name("printer_a5")
     create_pdf_folder(PAPER_FOLDER["A5"])
     filepath = save_to_pdf(url, PAPER_FOLDER["A5"])
-    print_pdf(printer_2, PAPER_FOLDER["A5"], filepath)
+    print_pdf(printer_a5, PAPER_FOLDER["A5"], filepath)
 
 
 def print_A6(url):
-    global printer_3
-    if printer_3 == "":
-        printer_3 = config.get('CONFIG', 'printer_3').strip("\n")
-        printer_3 = printer_3 if (printer_3 != "0") else ""
+    global printer_a6
+    if printer_a6 == "":
+        printer_a6 = get_printer_name("printer_a6")
     create_pdf_folder(PAPER_FOLDER["A6"])
     filepath = save_to_pdf(url, PAPER_FOLDER["A6"])
-    print_pdf(printer_3, PAPER_FOLDER["A6"], filepath)
+    print_pdf(printer_a6, PAPER_FOLDER["A6"], filepath)
+
 
 
 def print_engine(url, paper_type):

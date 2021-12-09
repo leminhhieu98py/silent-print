@@ -2,22 +2,22 @@ from global_variables import *
 
 
 # CONFIG PRINTER -------------------------------------------------
-def select_printer_1(selection):
-    global printer_1
-    printer_1 = selection
-    save_printer_to_config(printer_1, "printer_1")
+def select_printer_a4(selection):
+    global printer_a4
+    printer_a4 = selection
+    save_printer_to_config(printer_a4, "printer_a4")
 
 
-def select_printer_2(selection):
-    global printer_2
-    printer_2 = selection
-    save_printer_to_config(printer_2, "printer_2")
+def select_printer_a5(selection):
+    global printer_a5
+    printer_a5 = selection
+    save_printer_to_config(printer_a5, "printer_a5")
 
 
-def select_printer_3(selection):
-    global printer_3
-    printer_3 = selection
-    save_printer_to_config(printer_3, "printer_3")
+def select_printer_a6(selection):
+    global printer_a6
+    printer_a6 = selection
+    save_printer_to_config(printer_a6, "printer_a6")
 
 
 def save_printer_to_config(printer, config_selection):
